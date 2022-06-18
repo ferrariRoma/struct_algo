@@ -64,55 +64,43 @@ console.log(
   )
 ); */
 
-2;
-3;
-4;
-5;
-6;
-7;
-8;
-9;
-10;
-11;
-12;
-13;
-14;
-15;
-16;
-17;
-18;
-19;
-20;
-21;
-22;
-23;
-24;
-25;
-26;
-27;
+// 다른 풀이 공부
 const transpose = (matrix) =>
   matrix.reduce(
     (result, row) => row.map((_, i) => [...(result[i] || []), row[i]]),
     []
   );
 
-const solution = (board, moves) => {
-  const stacks = transpose(board).map((row) =>
-    row.reverse().filter((el) => el !== 0)
-  );
-  const basket = [];
+function solution(board, moves) {
+  const stacks = transpose(board).map((row) => row.filter((el) => el !== 0));
+  // 풀이에서는,
+  // const stacks = transpose(board).reverse().map((row) => row.filter((el) => el !== 0));
+  // reverse()메소드를 이용해서 뒤집은 다음에 pop()메소드를 사용했지만, shift()가 있기 때문에 reverse()를 빼고 진행
+  const box = [];
   let result = 0;
 
   for (const move of moves) {
-    const pop = stacks[move - 1].pop();
+    const pop = stacks[move - 1].shift();
     if (!pop) continue;
-    if (pop === basket[basket.length - 1]) {
-      basket.pop();
+    if (pop === box[box.length - 1]) {
+      box.pop();
       result += 2;
       continue;
     }
-    basket.push(pop);
+    box.push(pop);
   }
-
   return result;
-};
+}
+
+console.log(
+  solution(
+    [
+      [0, 0, 0, 0, 0],
+      [0, 0, 1, 0, 3],
+      [0, 2, 5, 0, 1],
+      [4, 2, 4, 4, 2],
+      [3, 5, 1, 3, 1],
+    ],
+    [1, 5, 3, 5, 1, 2, 1, 4]
+  )
+);
