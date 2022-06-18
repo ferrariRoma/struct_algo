@@ -11,7 +11,7 @@
  * 4. result에는 같은 값이 두 개면 pop()메소드를 두 번 작동시켜서 같은 값을 제거한다.
  */
 
-function solution(board, moves) {
+/* function solution(board, moves) {
   const moves__Length = moves.length;
   const board__Length = board.length;
   const result = [];
@@ -51,7 +51,6 @@ function solution(board, moves) {
   }
   return count;
 }
-
 console.log(
   solution(
     [
@@ -63,4 +62,57 @@ console.log(
     ],
     [1, 5, 3, 5, 1, 2, 1, 4]
   )
-);
+); */
+
+2;
+3;
+4;
+5;
+6;
+7;
+8;
+9;
+10;
+11;
+12;
+13;
+14;
+15;
+16;
+17;
+18;
+19;
+20;
+21;
+22;
+23;
+24;
+25;
+26;
+27;
+const transpose = (matrix) =>
+  matrix.reduce(
+    (result, row) => row.map((_, i) => [...(result[i] || []), row[i]]),
+    []
+  );
+
+const solution = (board, moves) => {
+  const stacks = transpose(board).map((row) =>
+    row.reverse().filter((el) => el !== 0)
+  );
+  const basket = [];
+  let result = 0;
+
+  for (const move of moves) {
+    const pop = stacks[move - 1].pop();
+    if (!pop) continue;
+    if (pop === basket[basket.length - 1]) {
+      basket.pop();
+      result += 2;
+      continue;
+    }
+    basket.push(pop);
+  }
+
+  return result;
+};
