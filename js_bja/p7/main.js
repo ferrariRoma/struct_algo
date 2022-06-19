@@ -64,57 +64,30 @@ console.log(
   )
 ); */
 
-// 다른 풀이 공부(2회차)
-/* const transpose = (matrix) =>
-  matrix.reduce(
-    (result, row) => row.map((_, i) => [...(result[i] || []), row[i]]),
-    []
-  );
-
-function solution(board, moves) {
-  const stacks = transpose(board).map((row) => row.filter((el) => el !== 0));
-  // 풀이에서는,
-  // const stacks = transpose(board).reverse().map((row) => row.filter((el) => el !== 0));
-  // reverse()메소드를 이용해서 뒤집은 다음에 pop()메소드를 사용했지만, shift()가 있기 때문에 reverse()를 빼고 진행
-  const box = [];
-  let result = 0;
-
-  for (const move of moves) {
-    const pop = stacks[move - 1].shift();
-    if (!pop) continue;
-    if (pop === box[box.length - 1]) {
-      box.pop();
-      result += 2;
-      continue;
-    }
-    box.push(pop);
-  }
-  return result;
-} */
-
+// 다른 풀이 공부(3회차)
 const transpose = (matrix) =>
   matrix.reduce(
     (result, row) => row.map((_, i) => [...(result[i] || []), row[i]]),
     []
   );
 
-function solution(board, moves) {
+const solution = (board, moves) => {
   const stacks = transpose(board).map((row) => row.filter((el) => el !== 0));
   const box = [];
   let result = 0;
 
-  for (const move in moves) {
-    const catched = stacks[moves[move] - 1].shift();
-    if (!catched) continue;
-    if (catched === box[box.length - 1]) {
+  for (const move of moves) {
+    const choose = stacks[move - 1].shift();
+    if (!choose) continue;
+    if (choose === box[box.length - 1]) {
       box.pop();
       result += 2;
       continue;
     }
-    box.push(catched);
+    box.push(choose);
   }
   return result;
-}
+};
 
 console.log(
   solution(
