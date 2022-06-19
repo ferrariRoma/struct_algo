@@ -64,8 +64,8 @@ console.log(
   )
 ); */
 
-// 다른 풀이 공부
-const transpose = (matrix) =>
+// 다른 풀이 공부(2회차)
+/* const transpose = (matrix) =>
   matrix.reduce(
     (result, row) => row.map((_, i) => [...(result[i] || []), row[i]]),
     []
@@ -88,6 +88,30 @@ function solution(board, moves) {
       continue;
     }
     box.push(pop);
+  }
+  return result;
+} */
+
+const transpose = (matrix) =>
+  matrix.reduce(
+    (result, row) => row.map((_, i) => [...(result[i] || []), row[i]]),
+    []
+  );
+
+function solution(board, moves) {
+  const stacks = transpose(board).map((row) => row.filter((el) => el !== 0));
+  const box = [];
+  let result = 0;
+
+  for (const move in moves) {
+    const catched = stacks[moves[move] - 1].shift();
+    if (!catched) continue;
+    if (catched === box[box.length - 1]) {
+      box.pop();
+      result += 2;
+      continue;
+    }
+    box.push(catched);
   }
   return result;
 }
