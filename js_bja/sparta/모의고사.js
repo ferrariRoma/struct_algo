@@ -1,5 +1,5 @@
 // 모의고사
-function solution(answer) {
+/* function solution(answer) {
   const fool1 = [1, 2, 3, 4, 5];
   const fool2 = [2, 1, 2, 3, 2, 4, 2, 5];
   const fool3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
@@ -26,6 +26,24 @@ function solution(answer) {
   const top = Math.max(...resultArr);
   const result = [];
   resultArr.forEach((el, i) => (top === el ? result.push(i + 1) : result));
+  return result;
+} */
+
+function solution(arr) {
+  const one = [1, 2, 3, 4, 5];
+  const two = [2, 1, 2, 3, 2, 4, 2, 5];
+  const three = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
+  const point = [0, 0, 0];
+
+  for (let i = 0; i < arr.length; i++) {
+    one.forEach((el, i) => (el === arr[i % 5] ? point[0]++ : point[0]));
+    two.forEach((el, i) => (el === arr[i % 8] ? point[1]++ : point[1]));
+    three.forEach((el, i) => (el === arr[i % 10] ? point[2]++ : point[2]));
+  }
+
+  const maxPoint = Math.max(...point);
+  const result = [];
+  point.forEach((el, i) => (el === maxPoint ? result.push(i + 1) : result));
   return result;
 }
 
