@@ -1,3 +1,4 @@
+// 시저 암호
 // 아스키코드로 변환
 
 // 더해서 90(a) 이상이 되어버리는(대문자에서 소문자로 변환)숫자에 대한
@@ -32,7 +33,7 @@
 } */
 
 // 공부한 다른 풀이
-function solution(s, n) {
+/* function solution(s, n) {
   return s
     .split("")
     .map((value) => {
@@ -42,10 +43,25 @@ function solution(s, n) {
         : String.fromCharCode(value.charCodeAt() + n);
     })
     .join("");
+} */
+
+// 복습
+function solution(s, n) {
+  const question = [...s];
+  // 문자열을 대문자나 소문자로 바꿔준 다음 Z를 넘어가는 수는 -26을 해주고,
+  // Z를 넘어가지 않는 수는 그냥 더해준다.
+  const result = question
+    .map((el) => {
+      if (el.charCodeAt() === 32) return 32;
+      return el.toLowerCase().charCodeAt() + n > 122 // el.toUpperCase().cahrCodeAt() + n > 90와 같다.
+        ? el.charCodeAt() + n - 26
+        : el.charCodeAt() + n;
+    })
+    .map((el) => String.fromCharCode(el))
+    .join("");
+  return result;
 }
 
-console.log(solution("a B z", 4));
+solution("a B z", 4);
 // -> 너무 과정에 집착한 것 같다. 결과론적으로 보면 기준을 넘어가는 경우는 같음!
 // 과정에서 안보이면 결과에서 단순화하자!
-
-65~90 (A-H+25-Z) oeifjaowiefjoawj 97a~122z
