@@ -4,7 +4,6 @@ function solution(n) {
   for (let i = 0; i <= n; i++) {
     n % i ? sum : (sum += i);
   }
-  console.log(sum);
   return sum;
 }
 

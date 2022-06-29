@@ -13,6 +13,6 @@ function solution(str) {
     len <= 2 ? answer + answer[len - 1].repeat(3 - len) : answer);
 }
 
-solution("...!@BaT#*..y.abcdefghijklm");
-solution("=.=");
+console.log(solution("...!@BaT#*..y.abcdefghijklm"));
+console.log(solution("=.="));
 // console.log("bat.y.abcdefghijklm");
