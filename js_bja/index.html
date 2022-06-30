@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>React과제</title>
+  </head>
+  <body>
+    <main>
+      <form>
+        <div class="flexbox">
+          <label for="First name">First name :</label>
+          <input id="First name" type="text" required />
+        </div>
+
+        <div class="flexbox">
+          <label for="Last name">Last name :</label>
+          <input id="Last name" type="text" required />
+        </div>
+
+        <div class="flexbox">
+          <label for="Email">Email :</label>
+          <input id="Email" type="email" required />
+        </div>
+
+        <div>
+          <label>Gender :</label>
+          <input id="mail" type="radio" name="gender" />
+          <label for="mail">Male</label>
+          <input id="female" type="radio" name="gender" />
+          <label for="female">Female</label>
+        </div>
+
+        <div>
+          <label>Favorite : </label>
+          <input id="html" type="checkbox" name="Favorite" />
+          <label for="html">HTML</label>
+          <input id="java" type="checkbox" name="Favorite" />
+          <label for="java">JAVA</label>
+          <input id="js" type="checkbox" name="Favorite" />
+          <label for="js">JavaScript</label>
+        </div>
+        <div>
+          <label for="date">Browser : </label>
+          <select name="browser" id="date">
+            <option value="">크롬</option>
+            <option value="">사파리</option>
+            <option value="">엣지</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="Birthday">Birthday : </label>
+          <input id="Birthday" type="date" required />
+        </div>
+
+        <button type="submit">제출</button>
+      </form>
+    </main>
+  </body>
+  <script src="main.js"></script>
+</html>

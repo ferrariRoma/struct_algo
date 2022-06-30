@@ -64,6 +64,13 @@ console.log(
   )
 ); */
 
+// [
+//   [0, 0, 0, 0, 0],
+//   [0, 0, 1, 0, 3],
+//   [0, 2, 5, 0, 1],
+//   [4, 2, 4, 4, 2],
+//   [3, 5, 1, 3, 1],
+// ],
 // 다른 풀이 공부(3회차)
 const transpose = (matrix) =>
   matrix.reduce(
@@ -73,6 +80,7 @@ const transpose = (matrix) =>
 
 const solution = (board, moves) => {
   const stacks = transpose(board).map((row) => row.filter((el) => el !== 0));
+  console.log(stacks);
   const box = [];
   let result = 0;
 
