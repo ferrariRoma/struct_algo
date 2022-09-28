@@ -49,7 +49,7 @@ console.log(quickSort([4, 1, 7, 6, 3, 8, 2, 5]));
  */
 
 // 4차 복습
-function partition(arr, left, right, pivotIndex) {
+/* function partition(arr, left, right, pivotIndex) {
   let temp;
   const pivot = arr[pivotIndex];
   while (left <= right) {
@@ -75,6 +75,64 @@ function quickSort(arr, left, right) {
   if (left < pivotIndex - 1) quickSort(arr, left, pivotIndex - 1);
   if (right > pivotIndex + 1) quickSort(arr, pivotIndex + 1, right);
   return arr;
-}
+} */
+
+// 5차 복습
+/* const partition = (arr, left, right, pivotIndex) => {
+  const pivot = arr[pivotIndex];
+  let temp;
+  while (left <= right) {
+    while (arr[left] < pivot) left++;
+    while (arr[right] > pivot) right--;
+    if (left <= right) {
+      temp = arr[left];
+      arr[left] = arr[right];
+      arr[right] = temp;
+    }
+  }
+  temp = arr[pivotIndex];
+  arr[pivotIndex] = arr[left];
+  arr[left] = temp;
+  return left;
+};
+
+const quickSort = (arr, left, right) => {
+  if (!left) left = 0;
+  if (!right) right = arr.length - 1;
+  let pivotIndex = right;
+  pivotIndex = right;
+  pivotIndex = partition(arr, left, right - 1, pivotIndex);
+  if (left < pivotIndex - 1) quickSort(arr, left, pivotIndex - 1);
+  if (right > pivotIndex + 1) quickSort(arr, pivotIndex + 1, right);
+  return arr;
+}; */
+
+const partition = (arr, left, right, pivotIndex) => {
+  const pivot = arr[pivotIndex];
+  let temp;
+  while (left <= right) {
+    while (arr[left] < pivot) left++;
+    while (arr[right] > pivot) right--;
+    if (left <= right) {
+      temp = arr[left];
+      arr[left] = arr[right];
+      arr[right] = temp;
+    }
+  }
+  temp = pivot;
+  arr[pivotIndex] = arr[right];
+  arr[right] = temp;
+  return right;
+};
+
+const quickSort = (arr, left, right) => {
+  if (!left) left = 0;
+  if (!right) right = arr.length - 1;
+  let pivotIndex = left;
+  pivotIndex = partition(arr, left + 1, right, pivotIndex);
+  if (left < pivotIndex - 1) quickSort(arr, left, pivotIndex - 1);
+  if (right > pivotIndex + 1) quickSort(arr, pivotIndex + 1, right);
+  return arr;
+};
 
 console.log(quickSort([4, 1, 7, 6, 3, 8, 2, 5]));
