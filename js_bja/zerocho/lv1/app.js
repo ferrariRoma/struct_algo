@@ -104,43 +104,77 @@ console.log(solution(["abce", "abcd", "cdx"], 2)); */
 // 5	3
 /* 
 에라토스테네스의 체 ::: 이게 가능한 이유는 자연수의 성질 때문인데,
-모든 자연수는 소수들의 곱으로 표현이 된다. 즉, 모든 자연수는 2,3,5,7의 곱으로 표현이 된다는 말인데,
+모든 자연수는 소수들의 곱으로 표현이 된다. 즉, 소수가 아닌 모든 자연수는 2,3,5,7의 곱으로 표현이 된다는 말이다.
+이 성질을 이용해서 소수를 체를 이용해서 거르는 것 처럼 걸러버리는 것이 에라토스테네스의 체이다.
 
+1. i반복문은 주어진 숫자의 제곱근까지 구해보면 된다.
+2. j반복문은 주어진 숫자까지, i의 배수인 숫자만 탐색을 한다. 이 부분 때문에 i반복문에서 제곱근까지 반복문을 돌린다.
 */
 
-function solution(n) {
-  const arr = [];
-
-  // 인덱스 번호가 주어진 숫자 n과 대응하도록
-  // 빈 배열을 만들고 원소는 true 값으로 채워준다.
-  // 여기서 true 는 소수라는 의미이다.
-  // 배열은 0부터 시작하므로, 주어진 숫자 n에 1을 더해준다.
-  for (let i = 0; i < n + 1; i += 1) {
-    arr.push(true);
-  }
-  console.log("true를 넣어버림 ::: ", arr);
-
-  // 주어진 수의 제곱근까지만 계산해서 불필요한 반복을 최소화한다.
-  // arr[i] 가 소수일 경우, 반복문을 진행한다.
-  // 맨 처음 시작하는 2는 소수이므로,
-  // 2를 제외한 2의 제곱부터, 제곱 값만 체크하여 지워나간다.
-  // 제곱근까지 반복한다.
-  for (let i = 2; i * i <= n; i += 1) {
-    if (arr[i]) {
-      for (let j = i * i; j <= n; j += i) {
+/* function solution(num) {
+  const arr = Array(num + 1)
+    .fill(true)
+    .fill(false, 0, 2);
+  for (let i = 2; i < Math.sqrt(num); i++) {
+    for (let j = Math.pow(i, 2); j <= num; j += i) {
+      if (arr[j]) {
         arr[j] = false;
       }
     }
   }
+  const answer = arr.filter((el) => true === el);
+  return answer.length;
+} */
 
-  // 0과 1은 소수가 아니므로 false 값으로 바꿔준다.
-  arr.splice(0, 2, false, false);
+// 약수의 합 :: 잊고 있던 reduce를 remind
+// 12	28
+// 5	6
+/* function solution(num) {
+  return Array(num)
+    .fill()
+    .map((el, i) => i + 1)
+    .reduce((sum, value, i, all) => (num % value ? sum : sum + value), 0);
+} */
 
-  // 배열에서 true인 값만 걸러내고, true인 값의 개수를 출력한다.
-  const result = arr.filter((value) => {
-    return value !== false;
-  });
+// 정수 제곱근 판별
+// 121	144
+// 3	-1
+/* function solution(num) {
+  return Math.sqrt(num) % 1 ? -1 : Math.pow(num + 1, 2);
+  // 제곱은 **2로 표현할 수 있다.
+} */
 
-  return result.length;
+// 제일 작은 수 제거하기 :: 나는 sort메소드로 정렬 이후에 pop메소드를 사용해서 제거를 했는데
+// 제로초는 Math.min과 filter를 이용해서 해결을 했음
+// [4,3,2,1]	[4,3,2]
+// [10]	[-1]
+/* function solution(arr) {
+  const MinNum = Math.min(...arr);
+  const answer = arr.filter((el) => el !== MinNum);
+  return answer;
+} */
+
+// 최대 공약수와 최소 공배수 GCD LCM
+// 아래 두 가지 규칙, 성질을 이용하면 쉽게 구할 수 있다.
+// 유클리드 호제법 :: 최대 공약수를 구하는 법칙
+// 두 수의 곱은 최대공약수와 최소공배수의 곱과 같다.
+
+/* 
+[유클리드 호제법]
+1. 두 수 중에서 큰 수를 작은 수로 나눈다.
+2. 나누고 난 나머지가 0이라면 작은 수가 최대공약수이다.
+3. 0이 아니라면, 작은 수를 다시 나머지로 나눈다. => 재귀 사용
+4. 이를 반복해서 나머지가 0이 될 때, 그 수가 바로 두 수의 최대 공약수이다.
+*/
+
+// 3	12	[3, 12]
+// 2	5	[1, 10]
+function solution(n, m) {
+  function Euclidean(a, b) {
+    return b % a ? Euclidean(b % a, a) : a;
+  }
+  const GCD = Euclidean(n, m);
+  const LCM = (n * m) / GCD;
+  return [GCD, LCM];
 }
-console.log(solution(5));
+console.log(solution(2, 5));
