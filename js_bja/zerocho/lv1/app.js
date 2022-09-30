@@ -126,6 +126,37 @@ console.log(solution(["abce", "abcd", "cdx"], 2)); */
   return answer.length;
 } */
 
+/* function solution(num) {
+  const arr = Array(num + 1)
+    .fill(true)
+    .fill(false, 0, 2);
+  for (let i = 2; i < Math.sqrt(num); i++) {
+    for (let j = i ** 2; j <= num; j += i) {
+      if (arr[j]) {
+        arr[j] = false;
+      }
+    }
+  }
+  const answer = arr.filter((el) => el === true);
+  return answer.length;
+} */
+
+function solution(num) {
+  const arr = Array(num + 1)
+    .fill(true)
+    .fill(false, 0, 2);
+  for (let i = 2; i < Math.sqrt(num); i++) {
+    for (let j = i ** 2; j <= num; j += i) {
+      if (arr[j]) {
+        arr[j] = false;
+      }
+    }
+  }
+  const answer = arr.filter((el) => el === true);
+  return answer.length;
+}
+console.log(solution(5));
+
 // 약수의 합 :: 잊고 있던 reduce를 remind
 // 12	28
 // 5	6
@@ -169,7 +200,7 @@ console.log(solution(["abce", "abcd", "cdx"], 2)); */
 
 // 3	12	[3, 12]
 // 2	5	[1, 10]
-function solution(n, m) {
+/* function solution(n, m) {
   function Euclidean(a, b) {
     return b % a ? Euclidean(b % a, a) : a;
   }
@@ -177,4 +208,13 @@ function solution(n, m) {
   const LCM = (n * m) / GCD;
   return [GCD, LCM];
 }
-console.log(solution(2, 5));
+console.log(solution(2, 5)); */
+
+/* function solution(n, m) {
+  const Euclidean = (n, m) => {
+    return m % n ? Euclidean(m % n, n) : n;
+  };
+  const GCD = Euclidean(n, m);
+  const LCM = (n * m) / GCD;
+  return [GCD, LCM];
+} */
