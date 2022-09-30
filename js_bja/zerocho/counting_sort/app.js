@@ -49,7 +49,7 @@
 } */
 
 // 3차 복습
-function countingSort(arr, k) {
+/* function countingSort(arr, k) {
   let result = [],
     count;
   count = new Array(k[0] + 1).fill(0);
@@ -71,6 +71,47 @@ function countingSort(arr, k) {
   }
   console.log("4단계: ", result);
   return result;
+} */
+
+// 4차 복습
+/* function countingSort(arr, k) {
+  const answer = [];
+  const countIndex = Array(k[0] + 1).fill(0);
+  for (let i = 0; i < arr.length; i++) {
+    countIndex[arr[i]]++;
+  }
+  console.log("countIndex :: ", countIndex);
+
+  for (let i = 0; i < countIndex.length - 1; i++) {
+    countIndex[i + 1] += countIndex[i];
+  }
+  console.log("누적 합 계산하기 :: ", countIndex);
+
+  for (let i = 0; i < arr.length; i++) {
+    answer[countIndex[arr[i]] - 1] = arr[i];
+    countIndex[arr[i]] -= 1;
+  }
+  console.log("answer배열 :: ", answer);
+} */
+
+function countingSort(arr, k) {
+  const answer = [],
+    countIndex = Array(k[0] + 1).fill(0);
+
+  for (let i = 0; i < arr.length; i++) {
+    countIndex[arr[i]]++;
+  }
+
+  for (let i = 0; i < countIndex.length - 1; i++) {
+    countIndex[i + 1] += countIndex[i];
+  }
+
+  for (let i = 0; i < arr.length; i++) {
+    answer[countIndex[arr[i]] - 1] = arr[i];
+    countIndex[arr[i]] -= 1;
+  }
+
+  return answer;
 }
 
 console.log(countingSort([3, 4, 0, 1, 2, 4, 2, 4], [4]));

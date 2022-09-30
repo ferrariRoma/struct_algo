@@ -107,7 +107,7 @@ const quickSort = (arr, left, right) => {
   return arr;
 }; */
 
-const partition = (arr, left, right, pivotIndex) => {
+/* const partition = (arr, left, right, pivotIndex) => {
   const pivot = arr[pivotIndex];
   let temp;
   while (left <= right) {
@@ -133,6 +133,63 @@ const quickSort = (arr, left, right) => {
   if (left < pivotIndex - 1) quickSort(arr, left, pivotIndex - 1);
   if (right > pivotIndex + 1) quickSort(arr, pivotIndex + 1, right);
   return arr;
-};
+}; */
 
-console.log(quickSort([4, 1, 7, 6, 3, 8, 2, 5]));
+// 6차 복습하기
+// 중복되는 숫자가 있을 때는 성능이 별로인 느낌이?...
+/* function partition(arr, left, right, pivotIndex) {
+  const pivot = arr[pivotIndex];
+  let temp;
+  while (left <= right) {
+    while (arr[left] < pivot) left++;
+    while (arr[right] > pivot) right--;
+    if (left <= right) {
+      temp = arr[left];
+      arr[left] = arr[right];
+      arr[right] = temp;
+    }
+  }
+  temp = pivot;
+  arr[pivotIndex] = arr[left];
+  arr[left] = temp;
+  return left;
+}
+
+function quickSort(arr, left, right) {
+  if (!left) left = 0;
+  if (!right) right = arr.length - 1;
+  let pivotIndex = right;
+  pivotIndex = partition(arr, left, right - 1, pivotIndex);
+  if (left < pivotIndex - 1) quickSort(arr, left, pivotIndex - 1);
+  if (pivotIndex + 1 < right) quickSort(arr, pivotIndex + 1, right);
+  return arr;
+} */
+
+/* function partition(arr, left, right, pivotIndex) {
+  const pivot = arr[pivotIndex];
+  let temp;
+  while (left <= right) {
+    while (arr[left] < pivot) left++;
+    while (pivot < arr[right]) right--;
+    if (left <= right) {
+      temp = arr[left];
+      arr[left] = arr[right];
+      arr[right] = temp;
+    }
+  }
+  temp = arr[left];
+  arr[left] = arr[pivotIndex];
+  arr[pivotIndex] = temp;
+  return left;
+}
+function quickSort(arr, left, right) {
+  if (!left) left = 0;
+  if (!right) right = arr.length - 1;
+  let pivotIndex = right;
+  pivotIndex = partition(arr, left, right - 1, pivotIndex);
+  if (left < pivotIndex - 1) quickSort(arr, left, pivotIndex - 1);
+  if (pivotIndex + 1 < right) quickSort(arr, pivotIndex + 1, right);
+  return arr;
+} */
+
+// console.log(quickSort([38, 4, 1, 7, 6, 3, 20, 8, 2, 5, 11]));
