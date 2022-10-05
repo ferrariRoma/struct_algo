@@ -141,7 +141,7 @@ console.log(solution(["abce", "abcd", "cdx"], 2)); */
   return answer.length;
 } */
 
-function solution(num) {
+/* function solution(num) {
   const arr = Array(num + 1)
     .fill(true)
     .fill(false, 0, 2);
@@ -155,7 +155,7 @@ function solution(num) {
   const answer = arr.filter((el) => el === true);
   return answer.length;
 }
-console.log(solution(5));
+console.log(solution(5)); */
 
 // 약수의 합 :: 잊고 있던 reduce를 remind
 // 12	28
@@ -218,3 +218,81 @@ console.log(solution(2, 5)); */
   const LCM = (n * m) / GCD;
   return [GCD, LCM];
 } */
+
+// 평균 구하기 :: 평균, 합, 곱 등등은 reduce를 이용해서 처리하면 편합니다.
+// [1,2,3,4]	2.5
+// [5,5]	5
+/* function solution(arr) {
+  const answer = arr.reduce((acc, el, i) => {
+    if (i === arr.length - 1) {
+      acc += el;
+      return acc / (i + 1);
+    }
+    return (acc += el);
+  }, 0);
+  return answer;
+} */
+
+// 하샤드 수 :: x의 자리수 합으로 x가 나누어 떨어지면 x는 하사드 수 입니다. 18 => 1+8 = 9 => 18/9 = 2
+/* function solution(x) {
+  let answer = !(
+    x %
+    String(x)
+      .split("")
+      .reduce((acc, el, i) => {
+        return (acc += Number(el));
+      }, 0)
+  );
+  return answer;
+} */
+
+// 행렬의 덧셈 :: map 두 번 쓰면서 인덱스를 두 개 사용할 수 있게 되는데, arr2의 인자들에 접근 할 수 있다.
+// [[1,2],[2,3]]	[[3,4],[5,6]]	[[4,6],[7,9]]
+// [[1],[2]]	[[3],[4]]	[[4],[6]]
+/* function solution(arr1, arr2) {
+  const answer = arr1.map((a, i) =>
+    a.map((b, j) => {
+      return b + arr2[i][j];
+    })
+  );
+  return answer;
+} */
+
+// 124 나라의 숫자
+// 1	1
+// 2	2
+// 3	4
+// 4	11
+// 10 41
+// 11 42
+// 12 44
+// 13 1
+// 14 2
+// 15 3
+// 16 11
+// 17 12
+// 18 14
+// ***** 수식 도출하는 거라서 나는 모르겠다;;; *****
+/* console.log(solution(3));
+function solution(n) {
+  return n ? solution((n - (n % 3 || 3)) / 3) + (n % 3 || 4) : "";
+} */
+
+// 가장 큰 정사각형 찾기
+// [[0,1,1,1],[1,1,1,1],[1,1,1,1],[0,0,1,0]]	9
+// [[0,0,1,1],[1,1,1,1]]	4
+
+// 1. 일단 하드코딩이라도 해서 풀어보기
+function solution(board) {
+  let a = 0,
+    b = 0;
+}
+
+console.log(
+  solution([
+    [0, 1, 1, 1],
+    [1, 1, 1, 1],
+    [1, 1, 1, 1],
+    [0, 0, 1, 0],
+  ])
+);
