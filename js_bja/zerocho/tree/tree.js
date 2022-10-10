@@ -71,7 +71,7 @@
  * _findRight : 오른쪽 노드로 탐색
  * _findLeft : 왼쪽 노드로 탐색
  */
-class Node {
+/* class Node {
   constructor(data) {
     this.right = null;
     this.left = null;
@@ -107,6 +107,39 @@ class Node {
   _findRight(data) {
     return this.right ? this.right.findNode(data) : null;
   }
+} */
+
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.right = null;
+    this.left = null;
+  }
+
+  insert(data) {
+    return data <= this.data ? this._insertLeft(data) : this._insertRight(data);
+  }
+  _insertRight(data) {
+    return this.right ? this.right.insert(data) : (this.right = new Node(data));
+  }
+  _insertLeft(data) {
+    return this.left ? this.left.insert(data) : (this.left = new Node(data));
+  }
+
+  find(data) {
+    if (this.data === data) return this;
+    return data <= this.data ? this._findLeft(data) : this._findRight(data);
+  }
+  _findRight(data) {
+    return this.right ? this.right.find(data) : null;
+  }
+  _findLeft(data) {
+    return this.left ? this.left.find(data) : null;
+  }
+
+  remove(data) {
+    if (this.data === data) return this;
+  }
 }
 
 const newNode = new Node(20);
@@ -115,3 +148,9 @@ newNode.insert(12);
 newNode.insert(15);
 newNode.insert(7);
 console.log(newNode);
+console.log(newNode.find(7));
+
+function isValidate(node, min = Infinity, max = -Infinity) {
+  if (!node) return false;
+  if(node.data)
+}
