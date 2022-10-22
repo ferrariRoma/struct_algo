@@ -100,7 +100,7 @@
 //   return modified;
 // }
 
-function solution(maps) {
+/* function solution(maps) {
   const HEIGHT = maps.length;
   const WIDTH = maps[0].length;
   const direction = [
@@ -139,6 +139,47 @@ function wrapEdges(maps) {
   }
   modified.unshift(new Array(modified.length + 1).fill(0));
   modified.push(new Array(modified.length + 1).fill(0));
+  return modified;
+} */
+
+function solution(maps) {
+  const HEIGHT = maps.length;
+  const WIDTH = maps[0].length;
+  const directions = [
+    [0, 1],
+    [0, -1],
+    [1, 0],
+    [-1, 0],
+  ];
+
+  let queue = [[1, 1, 1]];
+  let map = wrapEdges(maps);
+  map[1][1] = 0;
+
+  while (queue.length > 0) {
+    const [x, y, count] = queue.shift();
+    if (WIDTH === y && HEIGHT === x) {
+      return count;
+    }
+    for (let d of directions) {
+      const next = [x + d[0], y + d[1], count + 1];
+      if (map[next[0]][next[1]] === 1) {
+        map[next[0]][next[1]] = 0;
+        queue.push(next);
+      }
+    }
+  }
+  return -1;
+}
+
+function wrapEdges(maps) {
+  const modified = JSON.parse(JSON.stringify(maps));
+  for (let map of modified) {
+    map.push(0);
+    map.unshift(0);
+  }
+  modified.push(new Array(modified.length + 1).fill(0));
+  modified.unshift(new Array(modified.length + 1).fill(0));
   return modified;
 }
 
