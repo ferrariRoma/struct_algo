@@ -21,7 +21,7 @@
 // [1, 1, 1, 1, 1]	3	5
 // [4, 1, 2, 1]	4	2
 
-function solution(numbers, target) {
+/* function solution(numbers, target) {
   const length = numbers.length;
   let answer = 0;
 
@@ -37,6 +37,24 @@ function solution(numbers, target) {
 
   dfs(0, 0);
 
+  return answer;
+} */
+
+// 벨로그 정리 전 복습
+function solution(numbers, target) {
+  let answer = 0;
+  const length = numbers.length;
+
+  const DFS = (count, sum = numbers[0]) => {
+    if (count === length) {
+      if (sum === target) answer++;
+      return;
+    }
+    DFS(count + 1, sum + numbers[count]);
+    DFS(count + 1, sum - numbers[count]);
+  };
+
+  DFS(1);
   return answer;
 }
 
