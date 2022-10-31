@@ -115,24 +115,26 @@
 // }
 
 function solution(tickets) {
-  const copied = [...tickets];
+  const answer = [];
 
-  const DFS = (departure, remain, route = []) => {
+  const DFS = (departure, tickets, route = []) => {
     const newRoute = [...route, departure];
-    if (remain.length === 0) {
-      return newRoute;
+
+    if (tickets.length === 0) {
+      return answer.push(newRoute);
     } else {
-      remain.forEach((el, i) => {
-        if (el[0] === departure) {
-          const newRemain = remain.splice(i, 1);
-          const [from, to] = newRemain;
-          DFS(to, newRemain, newRoute);
+      tickets.forEach((ticket, idx) => {
+        if (ticket[0] === departure) {
+          const copied = [...tickets];
+          const [[from, to]] = copied.splice(idx, 1);
+          DFS(to, copied, newRoute);
         }
       });
     }
   };
 
-  DFS("ICN");
+  DFS("ICN", tickets);
+  return answer;
 }
 
 console.log(
