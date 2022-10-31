@@ -90,28 +90,49 @@
 그 중에서도 알파벳 순서로 정렬해서 경로를 찾아내야 한다. 그래서 이 문제는 DFS문제이다.
 
 */
+// function solution(tickets) {
+//   const getTickets = [...tickets];
+//   const answer = [];
+
+//   const DFS = (departure, route, remain) => {
+//     const setNewDeparture = remain.filter((el) => el[0] === departure);
+
+//     if (remain.length === 1) {
+//       return answer.push([...route, ...remain[0]]);
+//     }
+//     for (let i of setNewDeparture) {
+//       DFS(
+//         i[1],
+//         [...route, i[0]],
+//         remain.filter((el) => el !== i)
+//       );
+//     }
+//   };
+
+//   DFS("ICN", [], getTickets);
+
+//   return answer.sort()[0];
+// }
+
 function solution(tickets) {
-  const getTickets = [...tickets];
-  const answer = [];
+  const copied = [...tickets];
 
-  const DFS = (departure, route, remain) => {
-    const setNewDeparture = remain.filter((el) => el[0] === departure);
-
-    if (remain.length === 1) {
-      return answer.push([...route, ...remain[0]]);
-    }
-    for (let i of setNewDeparture) {
-      DFS(
-        i[1],
-        [...route, i[0]],
-        remain.filter((el) => el !== i)
-      );
+  const DFS = (departure, remain, route = []) => {
+    const newRoute = [...route, departure];
+    if (remain.length === 0) {
+      return newRoute;
+    } else {
+      remain.forEach((el, i) => {
+        if (el[0] === departure) {
+          const newRemain = remain.splice(i, 1);
+          const [from, to] = newRemain;
+          DFS(to, newRemain, newRoute);
+        }
+      });
     }
   };
 
-  DFS("ICN", [], getTickets);
-
-  return answer.sort()[0];
+  DFS("ICN");
 }
 
 console.log(
