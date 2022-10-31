@@ -49,26 +49,29 @@
   return answer;
 } */
 
-/* function solution(tickets) {
-  let answer = [];
+// function solution(tickets) {
+//   let answer = [];
 
-  const DFS = (airport, tickets, path) => {
-    let newPath = [...path, airport];
-    if (tickets.length === 0) {
-      answer.push(newPath);
-    } else {
-      tickets.map((ticket, idx) => {
-        if (ticket[0] === airport) {
-          let copiedTickets = [...tickets];
-          const [[from, to]] = copiedTickets.splice(idx, 1);
-          DFS(to, copiedTickets, newPath);
-        }
-      });
-    }
-  };
-  DFS("ICN", tickets, []);
-  return answer.sort()[0];
-} */
+//   const DFS = (airport, tickets, path) => {
+//     let newPath = [...path, airport];
+
+//     if (tickets.length === 0) {
+//       answer.push(newPath);
+//     } else {
+//       tickets.map((ticket, idx) => {
+//         if (ticket[0] === airport) {
+//           let copiedTickets = [...tickets];
+//           const [[from, to]] = copiedTickets.splice(idx, 1);
+//           DFS(to, copiedTickets, newPath);
+//         }
+//       });
+//     }
+//   };
+
+//   DFS("ICN", tickets, []);
+//   console.log(answer);
+//   return answer.sort()[0];
+// }
 
 /* 
 문제에 대한 이해
@@ -89,10 +92,26 @@
 */
 function solution(tickets) {
   const getTickets = [...tickets];
+  const answer = [];
 
-  const DFS = (departure, route) => {};
+  const DFS = (departure, route, remain) => {
+    const setNewDeparture = remain.filter((el) => el[0] === departure);
 
-  DFS("ICN");
+    if (remain.length === 1) {
+      return answer.push([...route, ...remain[0]]);
+    }
+    for (let i of setNewDeparture) {
+      DFS(
+        i[1],
+        [...route, i[0]],
+        remain.filter((el) => el !== i)
+      );
+    }
+  };
+
+  DFS("ICN", [], getTickets);
+
+  return answer.sort()[0];
 }
 
 console.log(
