@@ -58,4 +58,12 @@ x개 만큼의 log[2]{n} 길이의 문자를 탐색해야 하기 때문입니다
   }
 } */
 
-console.log(solution(83));
+// 복습
+/* function solution(n) {
+  const binary = n.toString(2).match(/1/g).length;
+  while (n++) {
+    if (binary === n.toString(2).match(/1/g).length) return n;
+  }
+} */
+
+console.log(solution(78));
