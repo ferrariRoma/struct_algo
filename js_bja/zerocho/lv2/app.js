@@ -66,4 +66,9 @@ x개 만큼의 log[2]{n} 길이의 문자를 탐색해야 하기 때문입니다
   }
 } */
 
+function solution(board) {
+  const length = board[0].length;
+  const height = board.length;
+}
+
 console.log(solution(78));
