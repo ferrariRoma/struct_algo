@@ -58,17 +58,29 @@ x개 만큼의 log[2]{n} 길이의 문자를 탐색해야 하기 때문입니다
   }
 } */
 
-// 복습
-/* function solution(n) {
-  const binary = n.toString(2).match(/1/g).length;
-  while (n++) {
-    if (binary === n.toString(2).match(/1/g).length) return n;
-  }
-} */
+function solution(n) {
+  let answer = 0,
+    number = 0,
+    sum = 0,
+    round = 0;
 
-function solution(board) {
-  const length = board[0].length;
-  const height = board.length;
+  while (++number) {
+    if (number > n) return answer;
+
+    sum += number;
+    console.log(number, sum);
+
+    if (sum === n) {
+      answer++;
+      sum = 0;
+      round++;
+      number = round;
+    } else if (sum > n) {
+      round++;
+      number = round;
+      sum = 0;
+    }
+  }
 }
 
-console.log(solution(78));
+console.log(solution(15));
