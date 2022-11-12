@@ -58,7 +58,9 @@ x개 만큼의 log[2]{n} 길이의 문자를 탐색해야 하기 때문입니다
   }
 } */
 
-function solution(n) {
+// 숫자의 표현
+// 기존 안
+/* function solution(n) {
   let answer = 0,
     number = 0,
     sum = 0,
@@ -81,6 +83,16 @@ function solution(n) {
       sum = 0;
     }
   }
-}
+} */
 
-console.log(solution(15));
+// 투 포인터라는 것을 알고 한 번 풀어보자
+// 투 포인터 보다도 규칙이 있었다.
+const implement = (start) => {};
+
+function improvement(n) {
+  let answer = 0;
+  const arr = new Array(n).fill(0).map((el, i) => i + 1);
+
+  return answer;
+}
+improvement(15);

@@ -294,7 +294,7 @@ console.log(solution(13)); */
 // [[0,0,1,1],[1,1,1,1]]	4
 
 // 1. 일단 하드코딩이라도 해서 풀어보기
-function solution(board) {
+/* function solution(board) {
   let a = 0,
     b = 0;
   const MAX = board.length ** 2;
@@ -313,4 +313,4 @@ console.log(
     [1, 1, 1, 1],
     [0, 0, 1, 0],
   ])
-);
+); */
