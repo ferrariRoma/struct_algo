@@ -89,10 +89,22 @@ x개 만큼의 log[2]{n} 길이의 문자를 탐색해야 하기 때문입니다
 // 투 포인터 보다도 규칙이 있었다.
 const implement = (start) => {};
 
-function improvement(n) {
-  let answer = 0;
-  const arr = new Array(n).fill(0).map((el, i) => i + 1);
+/* function improvement(n) {
+  let count = 0;
+  for (let i = 1; i <= n; i += 2) {
+    n % i ? null : count++;
+  }
+  return count;
+} */
 
-  return answer;
-}
-improvement(15);
+// 제로초 선생님의 풀이
+/* 
+내 풀이를 메소드로 다 바꾸신 느낌이다.
+*/
+const improvement = (n) => {
+  return Array(n)
+    .fill()
+    .map((_, i) => i + 1)
+    .filter((el) => !(n % el) && el % 2).length;
+};
+console.log(improvement(14));
