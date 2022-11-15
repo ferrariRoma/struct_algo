@@ -87,8 +87,6 @@ x개 만큼의 log[2]{n} 길이의 문자를 탐색해야 하기 때문입니다
 
 // 투 포인터라는 것을 알고 한 번 풀어보자
 // 투 포인터 보다도 규칙이 있었다.
-const implement = (start) => {};
-
 /* function improvement(n) {
   let count = 0;
   for (let i = 1; i <= n; i += 2) {
@@ -101,10 +99,26 @@ const implement = (start) => {};
 /* 
 내 풀이를 메소드로 다 바꾸신 느낌이다.
 */
-const improvement = (n) => {
+/* const improvement = (n) => {
   return Array(n)
     .fill()
     .map((_, i) => i + 1)
     .filter((el) => !(n % el) && el % 2).length;
+}; */
+
+// 최댓값과 최솟값
+
+/* 
+s	return
+"1 2 3 4"	"1 4"
+"-1 -2 -3 -4"	"-4 -1"
+"-1 -1"	"-1 -1" 
+*/
+
+const solution = (s) => {
+  let answer = s.split();
+  console.log(answer);
+  return answer;
 };
-console.log(improvement(14));
+
+console.log(solution("1 2 3 4"));
