@@ -25,12 +25,13 @@ function deepestLeavesSum(root: TreeNode | null): number {
     checkFn(root.right, pot, count);
   }
 
-  const sumFn = (root:TreeNode|null, max:number, maxPot:number[], count:number=0) => {
+  const sumFn = (root:TreeNode|null, max:number, maxPot:number[], count:number=0):number[] => {
     if(!root) return;
 
     count++;
     if(max === count) {
-      return maxPot.push(root.val);
+      maxPot.push(root.val);
+      return maxPot;
     }
 
     sumFn(root.left, max, maxPot, count);
