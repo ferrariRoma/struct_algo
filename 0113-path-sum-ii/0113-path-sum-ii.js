@@ -16,17 +16,17 @@ var pathSum = function(root, targetSum) {
     let stack = [];
     const recursiveHelper = (node) => {
         if(node?.val !== undefined) stack.push(node.val);
-        if(!node?.left && !node?.right && stack.length) {
+        if(!node?.left && !node?.right && stack.length !== 0) {
            const sum = stack.reduce((acc, curr) => acc+=curr);
            return sum === targetSum ? result.push([...stack]) : undefined;
         }
 
         if(node?.left) {
-            recursiveHelper(node?.left);
+            recursiveHelper(node.left);
             if(stack.length > 1) stack.pop();
         }
         if(node?.right) {
-            recursiveHelper(node?.right);
+            recursiveHelper(node.right);
             stack.pop();
         }
     }
