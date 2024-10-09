@@ -7,8 +7,6 @@ var minAddToMakeValid = function(s) {
     let f = 0;
     let sum = 0;
     arred.forEach((el, idx, arr) => {
-        // if(o[p] === undefined) o[p] = 0;
-        // if(c[p] === undefined) c[p] = 0;
         if(el === '(') {
             f++;
         } else {
