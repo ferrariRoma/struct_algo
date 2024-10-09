@@ -23,8 +23,3 @@ var minAddToMakeValid = function(s) {
     
     return Math.abs(f) + Math.abs(sum);    
 };
-
-/* 
-( ) 마이너스 없이 0으로 갔으니 끝 / ) ) -2인채로 새로운 괄호가 열리니 끝 / ( ( 2
-( ( ) ( ) ) 0이니까 끝 / ((
-*/
