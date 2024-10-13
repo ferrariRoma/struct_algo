@@ -5,9 +5,9 @@
 var smallestRange = function(nums) {
     let pq = [];
     const obj = {};
-    const ans = [];
     let k = nums.length;
     let isNotZero = 0;
+    let ans;
     
     for(let i = 0; i < nums.length; i++) {
         for(let j = 0; j < nums[i].length; j++) {
@@ -28,10 +28,13 @@ var smallestRange = function(nums) {
             obj[element]++;
             rIdx++;
         } else {
-            if(ans.length===0) ans.push([pq[lIdx][1], pq[rIdx-1][1]]);
+            if(ans === undefined) ans = [pq[lIdx][1], pq[rIdx-1][1]];
             else {
-                if(ans[ans.length-1][1] - ans[ans.length-1][0] >= pq[rIdx-1][1] - pq[lIdx][1]) {
-                    ans.push([pq[lIdx][1], pq[rIdx-1][1]]);
+                if(ans[1] - ans[0] > pq[rIdx-1][1] - pq[lIdx][1]) {
+                    ans = [pq[lIdx][1], pq[rIdx-1][1]];
+                } else if(ans[1] - ans[0] === pq[rIdx-1][1] - pq[lIdx][1]) {
+                    if(ans[0] > pq[lIdx][1])
+                        ans = [pq[lIdx][1], pq[rIdx-1][1]];
                 }
             }
             const [element, priority] = pq[lIdx];
@@ -40,15 +43,6 @@ var smallestRange = function(nums) {
             if(obj[element] === 0) isNotZero--;
         }
     }
-    let idx, prev = Number.MAX_SAFE_INTEGER;
-    ans.forEach((el,i,arr)=>{
-        if(prev > el[1] - el[0]) {
-            prev = el[1] - el[0];
-            idx = i;
-        } else if(prev === el[1] - el[0]) {
-            if(arr[i][0] > el[0])
-                idx = i;
-        }
-    })
-    return ans[idx];
+    
+    return ans;
 };
