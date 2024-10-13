@@ -6,6 +6,8 @@ var smallestRange = function(nums) {
     let pq = new MinPriorityQueue();
     const obj = {};
     const ans = [];
+    let k = nums.length;
+    let isNotZero = 0;
     
     for(let i = 0; i < nums.length; i++) {
         for(let j = 0; j < nums[i].length; j++) {
@@ -18,9 +20,11 @@ var smallestRange = function(nums) {
     let lIdx = 0;
     let rIdx = 0;
     while(true) {
-        if(Object.values(obj).includes(0)) {
+        if(isNotZero !== k) {
             if(rIdx === pq.length) break;
             const {priority, element} = pq[rIdx];
+            if(obj[element] === 0)
+                isNotZero++;
             obj[element]++;
             rIdx++;
         } else {
@@ -33,6 +37,7 @@ var smallestRange = function(nums) {
             const {priority, element} = pq[lIdx];
             lIdx++;
             obj[element]--;
+            if(obj[element] === 0) isNotZero--;
         }
     }
     let idx, prev = Number.MAX_SAFE_INTEGER;
