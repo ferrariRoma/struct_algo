@@ -19,16 +19,16 @@ class PQ {
         this.values.push(newNode);
         this.bubbleup(this.values.length - 1);
         return this.values;
-    }
-    ;exchange(idx1, idx2) {
+    };
+    exchange(idx1, idx2) {
         return [this.values[idx1],this.values[idx2]] = [this.values[idx2], this.values[idx1]];
-    }
+    };
     getLeftChildIdx(idx) {
         return (idx * 2) + 1
-    }
+    };
     getParentIdx(idx) {
         return Math.floor((idx - 1) / 2)
-    }
+    };
     bubbleup(idx) {
         const parentIdx = this.getParentIdx(idx);
         if (this.values[idx]?.priority < this.values[parentIdx]?.priority) {
@@ -36,14 +36,14 @@ class PQ {
             if (parentIdx !== 0)
                 return this.bubbleup(parentIdx);
         }
-    }
-    ;dequeue() {
+    };
+    dequeue() {
         this.exchange(this.values.length - 1, 0);
         const popNode = this.values.pop();
         this.sinkdown(0);
         return popNode;
-    }
-    ;sinkdown(idx) {
+    };
+    sinkdown(idx) {
         const lChildIdx = this.getLeftChildIdx(idx);
         if (this.values[idx]?.priority > this.values[lChildIdx]?.priority
            || this.values[idx]?.priority > this.values[lChildIdx+1]?.priority) {
@@ -54,8 +54,7 @@ class PQ {
             if (biggest < this.values.length)
                 return this.sinkdown(biggest);
         }
-    }
-    ;
+    };
 }
 
 var smallestChair = function(times, targetFriend) {
@@ -65,11 +64,11 @@ var smallestChair = function(times, targetFriend) {
     for (let i = 0; i < times.length; i++) {
         emptyChairs.enqueue(i, i);
     }
-    let aTime, lTime, chair;
-    while (true) {
+    let aTime, lTime, chair, idx = 0;
+    while (idx!==times.length) {
         if (arrive.length === 0)
             break;
-        [aTime,lTime] = arrive.shift();
+        [aTime,lTime] = arrive[idx]
         if (aTime === times[targetFriend][0] && lTime === times[targetFriend][1]) {
             while (leavePriority.values[0]?.priority <= aTime) {
                 const {value: leftChair} = leavePriority.dequeue();
@@ -88,6 +87,7 @@ var smallestChair = function(times, targetFriend) {
             chair = emptyChairs.dequeue();
             leavePriority.enqueue(chair.value, lTime);
         }
+        idx++;
     }
     return emptyChairs.dequeue().value;
 };
