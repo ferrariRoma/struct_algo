@@ -3,7 +3,7 @@
  * @return {number[]}
  */
 var smallestRange = function(nums) {
-    let pq = new MinPriorityQueue();
+    let pq = [];
     const obj = {};
     const ans = [];
     let k = nums.length;
@@ -11,30 +11,30 @@ var smallestRange = function(nums) {
     
     for(let i = 0; i < nums.length; i++) {
         for(let j = 0; j < nums[i].length; j++) {
-            pq.enqueue(i, nums[i][j]);
+            pq.push([i, nums[i][j]]);
         }
         obj[i] = 0;
     }
-    pq = pq.toArray();
+    pq.sort((a,b)=>a[1]-b[1]);
 
     let lIdx = 0;
     let rIdx = 0;
     while(true) {
         if(isNotZero !== k) {
             if(rIdx === pq.length) break;
-            const {priority, element} = pq[rIdx];
+            const [element, priority] = pq[rIdx];
             if(obj[element] === 0)
                 isNotZero++;
             obj[element]++;
             rIdx++;
         } else {
-            if(ans.length===0) ans.push([pq[lIdx].priority, pq[rIdx-1].priority]);
+            if(ans.length===0) ans.push([pq[lIdx][1], pq[rIdx-1][1]]);
             else {
-                if(ans[ans.length-1][1] - ans[ans.length-1][0] >= pq[rIdx-1].priority - pq[lIdx].priority) {
-                    ans.push([pq[lIdx].priority, pq[rIdx-1].priority]);
+                if(ans[ans.length-1][1] - ans[ans.length-1][0] >= pq[rIdx-1][1] - pq[lIdx][1]) {
+                    ans.push([pq[lIdx][1], pq[rIdx-1][1]]);
                 }
             }
-            const {priority, element} = pq[lIdx];
+            const [element, priority] = pq[lIdx];
             lIdx++;
             obj[element]--;
             if(obj[element] === 0) isNotZero--;
