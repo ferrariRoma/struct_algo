@@ -5,7 +5,7 @@
 var parseBoolExpr = function(expression) {
     const s = [];
     let idx = 0, curr;
-    const recur = () => {
+    const helper = () => {
         const arr = [];
         let result, p;
         while(true) {
@@ -41,8 +41,7 @@ var parseBoolExpr = function(expression) {
             case '(':
                 break;
             case ')':
-                // 호출
-                recur();
+                helper();
                 break;
             case 't':
                 s.push(true);
