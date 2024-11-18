@@ -3,44 +3,30 @@
  * @param {number} k
  * @return {number[]}
  */
-var decrypt = function(code, k) {  
+var decrypt = function(code, k) {
     const n = code.length;
-    const total = code.reduce((acc, cur)=>acc+cur);
-    let share, rest;
-    for(let i = 0; i < code.length; i++) {
-        if(k==0) {
-            code[i] = 0;
-            continue;
-        }
-        if(k>0) {
-            // positive number
-          share = Math.floor(k/n);
-             rest = k%n; 
-        } else {
-            // negative number
-             share = Math.ceil(k/n);
-         rest = k%n;
-        }
+    const ans = Array(n).fill(0);
+    if(k == 0) return ans;
+        
+    let start, end, sum = 0;
+    if(k<0) {
+       start = n+k;
+       end = n-1;
+    } else {
+       start = 1;
+        end = k;
     }
-    if(k==0) return code;
     
-    let i = 0, temp = rest, circle = Math.abs(share*total), sum=0;
-    const ans = [];
-    while(i<n) {
-        if(temp == 0) {
-            temp = rest;
-            ans[i] = sum+circle;
-            i++;
-            sum = 0
-            continue;
-        }        
-        if(rest<0) {
-            sum += code.at(i+temp);
-            temp++;
-        } else {
-            sum += code[(i+temp)%n];
-            temp--;
-        }
+    for(let i = start; i <= end; i++) {
+        sum+=code[i%n];
+    }
+    for(let i = 0; i < n; i++) {
+        ans[i] = sum;
+        
+        sum -= code[start%n];
+        start++;
+        end++;
+        sum += code[end%n];
     }
     return ans;
 };
