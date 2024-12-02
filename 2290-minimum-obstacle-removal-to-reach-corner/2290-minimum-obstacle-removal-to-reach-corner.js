@@ -54,7 +54,6 @@ var minimumObstacles = function(grid) {
     deque.pushFront([0,0],0);
     vis[0][0] = 0;
     while(deque.getSize()) {
-        const leng = deque.getSize();
         const [x,y] = deque.popFront();
         for(const [dx, dy] of dir) {
             const [nx, ny] = [x+dx, y+dy];
