@@ -11,34 +11,16 @@
  * @return {TreeNode}
  */
 var reverseOddLevels = function(root) {
-    /*
-    1. 문제분석
-    이진트리.
-    트리의 홀수 레벨의 각각의 노드 값들을 뒤집어라.
-    
-    
-    2. 예시분석
-    root = [2,3,5,8,13,21,34]
-    Output: [2,5,3,8,13,21,34]
-    
-    3. 분석한 것을 구현하기 위해 사용해야 하는 알고리즘, 자료구조
-    BFS를 해야 겠는데?
-    */
-    let s1 = [root];
-    let level = 0;
-    while(s1.length) {
-        const s2 = [];
-        for(let i=0; i<s1.length; i++) {
-            // exchange value if it is odd level
-            if(level%2===1 && i<Math.floor(s1.length/2)) 
-                [s1[i].val, s1[s1.length-1-i].val] = [s1[s1.length-1-i].val, s1[i].val];
-            if(s1[i].left) {
-                s2.push(s1[i].left);
-                s2.push(s1[i].right);
-            }
+    const DFS = (leftNode, rightNode, level) => {
+        if(!leftNode || !rightNode) return;
+        if(level%2===1) {
+            [leftNode.val, rightNode.val] = [rightNode.val, leftNode.val];
         }
-        s1 = s2;
-        level++;
-    };
+        DFS(leftNode.left, rightNode.right, level+1);
+        DFS(leftNode.right, rightNode.left, level+1);
+    }
+    
+    DFS(root.left, root.right, 1);
+    
     return root;
 };
