@@ -10,20 +10,25 @@ var checkIfPrerequisite = function(numCourses, prerequisites, queries) {
         const [a,b] = prerequisites[i];
         if(!tables[b].has(a)) tables[b].set(a);
     }
-    const checkReq = (u, v) => {
-        if(tables[v].has(u)) return true;
+    const dfs = (u, v, visited) => {
+        if(visited[v]) return;
+        else if(tables[v].size == 0) return visited[v] = false;
+        else if(tables[v].has(u)) return true;
         else {
-            const queue = [...tables[v].keys()];
-            while(queue.length) {
-                const temp = queue.pop();
-                return checkReq(u, temp);
+            visited[v] = true;
+            const requisites = [...tables[v].keys()];
+            while(requisites.length) {
+                const temp = requisites.pop();
+                const res = dfs(u, temp, visited);
+                if(res) return true;
             }
             return false;
         }
     }
     for(let i = 0; i < queries.length; i++) {
         const [u, v] = queries[i];
-        const res = checkReq(u, v);
+        const visited = Array(numCourses).fill(false);
+        const res = dfs(u,v,visited);
         ans.push(res);
     }
     return ans;
