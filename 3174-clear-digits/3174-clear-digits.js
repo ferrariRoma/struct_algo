@@ -15,7 +15,6 @@ var clearDigits = function(s) {
             }
         }
     }
-    console.log(deleteIndices);
     let ans = '';
     for(let i = 0; i < s.length; i++) {
         if(!deleteIndices.has(i)) ans+=s[i];
