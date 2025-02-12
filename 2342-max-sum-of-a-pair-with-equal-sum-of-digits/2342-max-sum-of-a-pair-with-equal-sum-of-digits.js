@@ -15,8 +15,8 @@ var maximumSum = function(nums) {
 
     for(const [_, num] of t) {
         if(num.length < 2) continue;
-        else if(indices.length === 2) {
-            ans = ans < indices[0] + indices[1] ? indices[0] + indices[1] : ans;
+        else if(num.length === 2) {
+            ans = ans < num[0] + num[1] ? num[0] + num[1] : ans;
         } else {
             const maxNum = Math.max(...num);
             num[num.indexOf(maxNum)] = -1;
