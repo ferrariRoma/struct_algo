@@ -24,7 +24,8 @@ var FindElements = function(root) {
 
     while(queue.length) {
         const temp = [];
-        for(let i = 0; i < queue.length; i++) {
+        const n = queue.length;
+        for(let i = 0; i < n; i++) {
             const node = queue.shift();
             if(node.left) {
                 node.left.val = node.val*2+1;
