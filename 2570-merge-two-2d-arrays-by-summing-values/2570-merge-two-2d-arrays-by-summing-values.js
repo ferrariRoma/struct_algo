@@ -4,9 +4,12 @@
  * @return {number[][]}
  */
 var mergeArrays = function(nums1, nums2) {
-    const nums3 = nums1.concat(nums2).sort((a,b)=>a[0]-b[0]);
     const t = new Map();
-    nums3.forEach(([id,val])=>{
+    nums1.forEach(([id,val])=>{
+        if(t.has(id)) t.get(id).push(val);
+        else t.set(id, [val]);
+    })
+    nums2.forEach(([id,val])=>{
         if(t.has(id)) t.get(id).push(val);
         else t.set(id, [val]);
     })
@@ -15,5 +18,5 @@ var mergeArrays = function(nums1, nums2) {
         const sum = val.reduce((acc, curr)=>acc+curr);
         ans.push([id, sum]);
     }
-    return ans;
+    return ans.sort((a,b)=>a[0]-b[0]);
 };
