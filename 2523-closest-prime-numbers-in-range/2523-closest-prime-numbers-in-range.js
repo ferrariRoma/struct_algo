@@ -19,11 +19,9 @@ var closestPrimes = function(left, right) {
 
     if(candiNum.length < 2) return ans;
 
-    console.log(candiNum);
     let minimum = Number.MAX_SAFE_INTEGER;
     for(let i = 0; i < candiNum.length-1; i++) {
         if(candiNum[i] !== 1 && candiNum[i+1] - candiNum[i] < minimum) {
-            console.log(candiNum[i], candiNum[i+1]);
             ans[0] = candiNum[i];
             ans[1] = candiNum[i+1];
             minimum = candiNum[i+1] - candiNum[i];
