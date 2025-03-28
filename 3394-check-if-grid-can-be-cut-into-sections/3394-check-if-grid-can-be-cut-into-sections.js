@@ -4,50 +4,20 @@
  * @return {boolean}
  */
 var checkValidCuts = function(n, rectangles) {
-    const horizontal = [], vertical = [];
-    for(let i = 0; i < rectangles.length; i++) {
-        const [x1, y1, x2, y2] = rectangles[i];
-        horizontal.push([i, y1, 1]);
-        horizontal.push([i, y2, 2]);
-        vertical.push([i, x1, 1]);
-        vertical.push([i, x2, 2]);
-    }
+    const checkCuts = (rectangles, dim) => {
+        if(rectangles.length === 0) return false;
+        const sorted = rectangles.sort((a,b) => a[dim] - b[dim]);
+        let ans = 0, furthestEnd = sorted[0][dim+2];
 
-    horizontal.sort((a,b) => a[1] - b[1] || b[2] - a[2]);
-    vertical.sort((a,b) => a[1] - b[1] || b[2] - a[2]);
+        for(let i = 1; i < sorted.length; i++) {
+            const currentStart = sorted[i][dim];
+            if(currentStart >= furthestEnd) {
+                ans++;
+            }
 
-    console.log(horizontal);
-    console.log(vertical);
-    const horizontalTable = new Map();
-    const startHorizontal = horizontal[0][1], endHorizontal = horizontal[horizontal.length-1][1];
-    let cuts = 0;
-
-    // check horizontal
-    for(const [index, y] of horizontal) {
-        if(horizontalTable.has(index)) {
-            horizontalTable.delete(index);
-            if(horizontalTable.size === 0 && startHorizontal !== y && endHorizontal !== y) cuts++;
-        } else {
-            horizontalTable.set(index, y);
+            furthestEnd = Math.max(furthestEnd, sorted[i][dim+2]);
         }
+        return ans >= 2;
     }
-
-    if(cuts >= 2) return true;
-
-    const verticalTable = new Map();
-    const startVertical = vertical[0][1], endVertical = vertical[vertical.length-1][1];
-    cuts = 0;
-    // check vertical
-    for(const [index, x] of vertical) {
-        if(verticalTable.has(index)) {
-            verticalTable.delete(index);
-            if(verticalTable.size === 0 && x !== startVertical && x !== endVertical) cuts++;
-        } else {
-            verticalTable.set(index, x);
-        }
-    }
-
-    if(cuts >= 2) return true;
-
-    return false;
+    return checkCuts(rectangles, 0) || checkCuts(rectangles, 1);
 };
