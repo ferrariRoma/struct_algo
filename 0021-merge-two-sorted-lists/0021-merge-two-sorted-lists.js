@@ -5,12 +5,12 @@ var mergeTwoLists = function(list1, list2) {
         if (!l1 && !l2) return;
         
         if (!l1) {
-            current.next = l2;
-            return;
+            return current.next = l2;
+            // return;
         }
         if (!l2) {
-            current.next = l1;
-            return;
+            return current.next = l1;
+            // return;
         }
         
         if (l1.val < l2.val) {
