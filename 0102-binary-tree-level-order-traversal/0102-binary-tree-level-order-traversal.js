@@ -11,9 +11,9 @@
  * @return {number[][]}
  */
 var levelOrder = function(root) {
-    const traversal = (tree) => {
+    const traversal = () => {
         const res = [];
-        let currq = [tree];
+        let currq = [root];
         while(currq.length) {
             const nextq = [], levels = [];
             const length = currq.length;
@@ -30,5 +30,5 @@ var levelOrder = function(root) {
         }
         return res;
     }
-    return traversal(root);
+    return traversal();
 };
