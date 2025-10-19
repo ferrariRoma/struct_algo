@@ -1,25 +1,20 @@
-/**
- * @param {number[]} nums
- * @return {number[][]}
- */
-var permute = function(nums) {
-    if (nums.length === 1) {
-        return [nums.slice()];
+const backtrack = (nums, visited, ans, selected) => {
+    if(nums.length === selected.length) {
+        return ans.push(selected.slice());
     }
-    
-    var res = [];
-
-    for (var i = 0; i < nums.length; i++) {
-        var n = nums.shift();
-        var perms = permute(nums.slice());
-
-        for (var p of perms) {
-            p.push(n);
-        }
-        
-        res.push(...perms);
-        nums.push(n);
+    for(let i = 0; i < visited.length; i++) {
+        if(visited[i]) continue;
+        visited[i] = true;
+        selected.push(nums[i]);
+        backtrack(nums, visited, ans, selected);
+        selected.pop();
+        visited[i] = false;
     }
-    
-    return res;  
-};
+}
+
+const permute = (nums) => {
+    const ans = [], selected = [];
+    const visited = Array(nums.length).fill(false);
+    backtrack(nums, visited, ans, selected);
+    return ans;
+}
