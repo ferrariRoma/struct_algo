@@ -3,15 +3,21 @@
  * @return {number[]}
  */
 var productExceptSelf = function(nums) {
-    const output = Array(nums.length).fill(1);
-    let left = 1, right = 1;
-    for(let i = 0; i < nums.length; i++) {
-        output[i] *= left;
-        left *= nums[i];
-    }
-    for(let i = nums.length-1; i >= 0; i--) {
-        output[i] *= right;
-        right *= nums[i];
-    }
-    return output;
+    let theNumberOfZero = 0;
+    let productOfAllExceptZero = 1;
+    nums.forEach(curr => {
+        if(curr == 0) theNumberOfZero++;
+        else {
+            productOfAllExceptZero *= curr;
+        }
+    });
+    return nums.map(curr => {
+        if(curr == 0) {
+            if(theNumberOfZero > 1) return 0;
+            else return productOfAllExceptZero;
+        } else {
+            if(theNumberOfZero > 0) return 0;
+            else return productOfAllExceptZero/curr;
+        }
+    });
 };
